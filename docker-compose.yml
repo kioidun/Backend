@@ -1,13 +1,13 @@
-version: "1.0.0"
+version: "1"
 
 services:
   #MongoDB
   db_service:
-    container_name: database_container
+    container_name: backend_container
     image: mysql:latest
     restart: always
     ports:
-      - 3306:3306
+      - 3307:3307
     volumes:
       - ./db_data:/data/db
     environment:
@@ -16,7 +16,7 @@ services:
       - MYSQL_DATABASE=${DB_NAME}
 
   app:
-    container_name: app_container
+    container_name: appbackend_container
     restart: always
     build: .
     ports:
@@ -25,7 +25,7 @@ services:
       - db_service
 
   migration:
-    container_name: migrator
+    container_name: migrator_backend
     build: .
     depends_on:
       - db_service
